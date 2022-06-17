@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Letting, Profile
+from .models import Letting, ProfileOld
 
 
 # Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -51,7 +51,7 @@ def letting(request, letting_id):
 # Nullam laoreet consectetur ex, sed consequat libero pulvinar eget. Fusc
 # faucibus, urna quis auctor pharetra, massa dolor cursus neque, quis dictum lacus d
 def profiles_index(request):
-    profiles_list = Profile.objects.all()
+    profiles_list = ProfileOld.objects.all()
     context = {'profiles_list': profiles_list}
     return render(request, 'profiles_index.html', context)
 
@@ -61,6 +61,6 @@ def profiles_index(request):
 # Sed tincidunt, dolor id facilisis fringilla, eros leo tristique lacus, it.
 # Nam aliquam dignissim congue. Pellentesque habitant morbi tristique senectus et netus et males
 def profile(request, username):
-    profile = Profile.objects.get(user__username=username)
+    profile = ProfileOld.objects.get(user__username=username)
     context = {'profile': profile}
     return render(request, 'profile.html', context)
