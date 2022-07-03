@@ -66,6 +66,6 @@ jobs:
       - run:
           name: Package app and push to DockerHub
           command: |
-            echo $DOCKERHUB_ACCESS_TOKEN | docker login -u $DOCKER_USER --password-stdin
+            docker login -u $DOCKER_USER -p $DOCKERHUB_ACCESS_TOKEN
             docker build -t $DOCKER_USER/oc_lettings:$CIRCLE_SHA1 .
             docker push $DOCKER_USER/oc_lettings:$CIRCLE_SHA1
