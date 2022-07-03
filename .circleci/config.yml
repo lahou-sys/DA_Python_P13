@@ -14,6 +14,10 @@ workflows:
 orbs:
   python: circleci/python@1.5.0
 
+machine:
+  services:
+    - docker
+    
 jobs:
   build-test-lint: 
     docker:
