@@ -57,7 +57,7 @@ jobs:
       - checkout
       - setup_remote_docker
 
-      # build and push Docker image
+      # build and push Docker image.
       - run:
           name: Package app and push to DockerHub
           command: |
