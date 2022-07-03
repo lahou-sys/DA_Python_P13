@@ -14,6 +14,7 @@ workflows:
               only: master
       - deploy:
           context:
+            - Docker_hub
             - heroku
           requires:
             - build-test-lint
@@ -92,5 +93,6 @@ jobs:
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY -a $HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set DEBUG=$DEBUG -a $HEROKU_APP_NAME
+            docker tag $DOCKER_USER/oc-lettings:$CIRCLE_SHA1 $HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a $HEROKU_APP_NAME web
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a $HEROKU_APP_NAME web
