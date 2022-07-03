@@ -16,10 +16,8 @@ orbs:
 
 jobs:
   build-test-lint: 
- 
     docker:
       - image: python:3.8-alpine
-    
     steps:
       - checkout
       # - restore_cache:
@@ -34,7 +32,6 @@ jobs:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - "venv"
-
       - run:
           name: Running tests
           command: |
@@ -48,15 +45,11 @@ jobs:
       - store_artifacts:
           path: flake-report/
           destination: flake-report
-
   containerization:
     docker:
       - image: python:3.8-alpine
-    
     steps:
       - checkout
-      - setup_remote_docker
-
       # build and push Docker image.
       - run:
           name: Package app and push to DockerHub
