@@ -67,5 +67,5 @@ jobs:
           name: Package app and push to DockerHub
           command: |
             docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker build -t $DOCKER_HUB_USER/oc_lettings:$CIRCLE_SHA1 .
-            docker push $DOCKER_HUB_USER/oc_lettings:$CIRCLE_SHA1
+            docker build -t $DOCKER_HUB_USER/oc-lettings:$CIRCLE_SHA1 .
+            docker push $DOCKER_HUB_USER/oc-lettings:$CIRCLE_SHA1
