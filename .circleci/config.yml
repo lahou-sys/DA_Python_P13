@@ -82,10 +82,9 @@ jobs:
             docker push $DOCKER_USER/oc-lettings:$CIRCLE_SHA1
 
   deploy:
-    executor: default
+    machine: True
     steps:
       - checkout
-      - setup_remote_docker
       - run:
           name: Installing Heroku CLI
           command: |
