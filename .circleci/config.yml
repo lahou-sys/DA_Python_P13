@@ -39,7 +39,7 @@ jobs:
           name: Running tests
           command: |
             . venv/bin/activate
-            pytest
+            python3 -m pytest
       - run:
           name: Running linting
           command: |
