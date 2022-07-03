@@ -12,6 +12,15 @@ workflows:
           filters:
             branches:
               only: master
+      - deploy:
+          context:
+            - heroku
+          requires:
+            - build-test-lint
+            - containerization
+          filters:
+            branches:
+              only: master
 
 orbs:
   python: circleci/python@1.5.0
@@ -71,3 +80,17 @@ jobs:
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker build -t $DOCKER_USER/oc-lettings:$CIRCLE_SHA1 .
             docker push $DOCKER_USER/oc-lettings:$CIRCLE_SHA1
+
+  deploy:
+    machine: True
+    steps:
+      - checkout
+      - run:
+          name: Push docker to Heroku
+          command: |
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY -a $HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set DEBUG=$DEBUG -a $HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a $HEROKU_APP_NAME web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a $HEROKU_APP_NAME web
