@@ -82,7 +82,7 @@ jobs:
             docker push $DOCKER_USER/oc-lettings:$CIRCLE_SHA1
 
   deploy:
-    machine: True
+    executor: default
     steps:
       - checkout
       - setup_remote_docker
