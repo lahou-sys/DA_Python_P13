@@ -14,10 +14,6 @@ workflows:
 orbs:
   python: circleci/python@1.5.0
 
-machine:
-  services:
-    - docker
-    
 jobs:
   build-test-lint: 
     docker:
@@ -54,6 +50,8 @@ jobs:
       - image: python:3.8-alpine
     steps:
       - checkout
+      - setup_remote_docker
+      
       # build and push Docker image.
       - run:
           name: Package app and push to DockerHub
