@@ -10,13 +10,6 @@ workflows:
           filters:
             branches:
               only: master
-      - deploy-dev:
-          requires:
-            - build-test-lint
-            - containerization
-          filters:
-            branches:
-              only: master
 
 orbs:
   python: circleci/python@1.5.0
