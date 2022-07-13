@@ -31,8 +31,8 @@ jobs:
       - image: python:3.8-alpine
     steps:
       - checkout
-      # - restore_cache:
-      #     key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run:
           name: Install dependencies
           command: |
@@ -93,6 +93,7 @@ jobs:
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku create $HEROKU_APP_NAME --region eu || true
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SECRET_KEY=$DJANGO_SECRET_KEY -a $HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set DEBUG=$DEBUG -a $HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SENTRY_DSN=$SENTRY_DSN -a $HEROKU_APP_NAME
 
       - run:
           name: Pulling container from Dockerhub
