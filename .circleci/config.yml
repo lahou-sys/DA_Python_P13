@@ -31,8 +31,8 @@ jobs:
       - image: python:3.8-alpine
     steps:
       - checkout
-      - restore_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      # - restore_cache:
+      #     key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run:
           name: Install dependencies
           command: |
