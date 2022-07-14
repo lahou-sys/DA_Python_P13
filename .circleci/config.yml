@@ -80,6 +80,7 @@ jobs:
       - run:
           name: Package app and push to DockerHub
           command: |
+            export SECRET_KEY="a_renseigner"
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker build -t $DOCKER_USER/oc-lettings:$CIRCLE_SHA1 .
             docker push $DOCKER_USER/oc-lettings:$CIRCLE_SHA1
