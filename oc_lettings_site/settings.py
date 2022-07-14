@@ -123,10 +123,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
 # SENTRY
-try:
-    SENTRY_DSN = os.environ.get('SENTRY_DSN')
-except KeyError:
-    SENTRY_DSN = ''
+SENTRY_DSN = os.environ.get('SENTRY_DSN')
 
 if SENTRY_DSN:
     sentry_sdk.init(
