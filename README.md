@@ -158,11 +158,14 @@ En considérant:
 - repo = Application créée dans DockerHub.
 - tag = Nom donné automatiquement à une image.
 - .env = chemin d'accès du fichier ".env".
+- PORT = port bind pour gunicorn
 
 Etapes:
 - Ouvrir un terminal avec les privilèges "root".
   - Télécharger l'image docker `docker pull user/repo:tag`.
   - Exécuter l'image docker `docker run --env-file .env user/repo:tag`.
+
+Exemple : docker run -d -e "PORT=8000" -p 8000:8000 --env-file .env lahou/oc-lettings:cb634a753c32902e593130bbef45b8e25bf6fd40
   
 Pour accéder au site rendez-vous à l'adresse: [localhost:8000](http://localhost:8000)
 
