@@ -1,13 +1,7 @@
 import os
 
-import environ
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
-
-# Initialise environment variables
-env = environ.Env()
-
-environ.Env.read_env()
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -18,19 +12,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-try:
-    SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', default='key_secret')
-except KeyError:
-    SECRET_KEY = env('DJANGO_SECRET_KEY_LOCAL')
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', default='key_secret')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-try:
-    DEBUG = int(os.environ.get('DEBUG', default=0))
-except KeyError:
-    DEBUG = int(env('DEBUG_LOCAL'))
+DEBUG = int(os.environ.get('DEBUG', default=0))
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "oc-lettings-78.herokuapp.com", ]
-
 
 # Application definition
 
@@ -138,7 +126,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 try:
     SENTRY_DSN = os.environ.get('SENTRY_DSN')
 except KeyError:
-    SENTRY_DSN = env('SENTRY_DSN_LOCAL')
+    SENTRY_DSN = ''
 
 if SENTRY_DSN:
     sentry_sdk.init(
