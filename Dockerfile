@@ -17,7 +17,7 @@ COPY . /app
 VOLUME /app
 
 # collect static files
-RUN python manage.py collectstatic --noinput
+RUN python manage.py collectstatic  --no-input --clear
 
 # run gunicorn
 CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
