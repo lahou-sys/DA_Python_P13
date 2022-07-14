@@ -25,9 +25,9 @@ except KeyError:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 try:
-    DEBUG = int(os.environ.get('DEBUG'))
+    DEBUG = os.environ.get('DEBUG')
 except KeyError:
-    DEBUG = int(env('DEBUG'))
+    DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "oc-lettings-78.herokuapp.com", ]
 
