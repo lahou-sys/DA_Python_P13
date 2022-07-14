@@ -4,6 +4,8 @@ workflows:
   pipeline:
     jobs:
       - build-test-lint
+          context:
+            - heroku
       - containerization:
           context:
             - Docker_hub
