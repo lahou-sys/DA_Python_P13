@@ -148,8 +148,19 @@ Après le déploiement le site est accéssible à l'adresse: [oc-lettings-78.her
 - Avoir exécuté le Pipeline précédent (sur CircleCi).
 - Renseigner les variables d'environnement dans le fichier ".env" (voir le tableau plus bas pour les variables)
 
-Pour le fichier ".env" voici le lien de la documentation : [Documentation variables environnement Django](https://alicecampkin.medium.com/how-to-set-up-environment-variables-in-django-f3c4db78c55f)
+Vous devez renseigner le fichier ".env" dans ".gitignore" pour l'exclure de la gestion git.
+Il doit absolument rester uniquement sur votre machine.
 
+exemple de fichier ".env":
+
+```txt
+
+DJANGO_SECRET_KEY='votre_secret_key'
+DEBUG=1
+SENTRY_DSN=https://xxxxxxxxxxxxxxxxxxxxxxxx.ingest.sentry.io/111111111
+
+```
+Remarque la valeur de la variable "SENTRY_DSN" ne doit pas avoir de quote.
 
 ### Utilisation
 
@@ -158,12 +169,12 @@ En considérant:
 - repo = Application créée dans DockerHub.
 - tag = Nom donné automatiquement à une image.
 - .env = chemin d'accès du fichier ".env".
-- PORT = port bind pour gunicorn
+- port = port bind pour gunicorn
 
 Etapes:
 - Ouvrir un terminal avec les privilèges "root".
   - Télécharger l'image docker `docker pull user/repo:tag`.
-  - Exécuter l'image docker `docker run --env-file .env user/repo:tag`.
+  - Exécuter l'image docker `docker run -d -e "PORT=port" -p 8000:8000 --env-file .env user/repo:tag`. (si vous lancez uniquement cette commande, l'image Docker sera aussi télégargée)
 
 Exemple : docker run -d -e "PORT=8000" -p 8000:8000 --env-file .env lahou/oc-lettings:cb634a753c32902e593130bbef45b8e25bf6fd40
   
