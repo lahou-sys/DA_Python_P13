@@ -3,7 +3,7 @@ version: 2.1
 workflows:
   pipeline:
     jobs:
-      - build-test-lint
+      - build-test-lint:
           context:
             - heroku
       - containerization:
