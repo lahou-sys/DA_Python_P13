@@ -21,13 +21,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 try:
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 except KeyError:
-    SECRET_KEY = env('DJANGO_SECRET_KEY')
+    SECRET_KEY = env('DJANGO_SECRET_KEY_LOCAL')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 try:
     DEBUG = os.environ.get('DEBUG')
 except KeyError:
-    DEBUG = env('DEBUG')
+    DEBUG = env('DEBUG_LOCAL')
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "oc-lettings-78.herokuapp.com", ]
 
@@ -138,7 +138,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 try:
     SENTRY_DSN = os.environ.get('SENTRY_DSN')
 except KeyError:
-    SENTRY_DSN = env('SENTRY_DSN')
+    SENTRY_DSN = env('SENTRY_DSN_LOCAL')
 
 if SENTRY_DSN:
     sentry_sdk.init(
